@@ -1,4 +1,4 @@
-# Programowanie-1R-2025-rozwi-zania
+# Programowanie-1R-2025-solutions
 Przykładowe rozwiązania zadań z kursu Programowanie 1 R. 
 
 https://www.qodl.eu/teaching/p1r-2026/
