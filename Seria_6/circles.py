@@ -1,9 +1,19 @@
 from argparse import ArgumentParser
-from math import pi, inf
 from typing import Self
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle as CirclePatch
+from math import pi
+
+
+class Inf:
+    """Klasa reprezentująca nieskończoną liczbę ułożeń/punktów (np. dla w pełni pokrywających się okręgów)."""
+    
+    def __str__(self) -> str:
+        return "inf"
+    
+    def __repr__(self) -> str:
+        return "inf"
 
 
 class Circle:
@@ -30,15 +40,18 @@ class Circle:
         """
         return 2 * pi * self.r
 
-    def intersection(self, second_circle: "Circle") -> int | float:
+    def intersection(self, second_circle: "Circle") -> int | Inf:
         """Metoda intersection oblicza liczbę punktów przecięcia dwóch okręgów. Przyjmuje jako argument drugi okrąg (second_circle) i zwraca liczbę punktów przecięcia (0, 1 lub 2).
 
         Args:
-            second_circle (Self): drugi okrąg, z którym porównujemy pierwszy okrąg (self) -- uwaga -- tutaj żeby zachować dobre typowanie, używamy Self, co oznacza, że argument second_circle musi być instancją tej samej klasy Circle.
-            omijamy w ten sposób problem z odwołaniem się do klasy Circle, która jest jeszcze w trakcie definiowania.
+            second_circle ("Circle"): drugi okrąg, z którym porównujemy pierwszy okrąg (self).
+                
+                Typowanie argumentów wewnątrz klasy, w której są definiowane, bywa problematyczne. Ponieważ klasa nie została jeszcze w pełni zainicjowana, użycie jej samej nazwy wywołałoby NameError. Zamiast tego z reguły stosuje się jedno z obejść:
+                1. "Circle" (typ jako string) - technika odroczonego sprawdzania typu (forward reference). Powszechne i spójne (szczególnie w adnotacjach metod statycznych).
+                2. Typ 'Self' (z modułu typing) - mechanizm stosowany od Pythona 3.11 precyzyjniej modelujący obiekty przy użyciu dziedziczenia. 
 
         Returns:
-            int | float: Liczba punktów przecięcia dwóch okręgów (0, 1, 2 lub inf dla identycznych okręgów)
+            int | Inf: Liczba punktów przecięcia dwóch okręgów (0, 1, 2 lub jako nieskończoność zwracamy obiekt klasy Inf)
         """
         # Spoiler biblioteki numpy. Oczywiście można po prostu policzyć z pitagorasa (odległość euklidesowa).
         centre_pos_1 = np.array([self.x0, self.y0])
@@ -47,7 +60,7 @@ class Circle:
 
         # Używamy np.isclose do precyzyjnych porównań floatów
         if np.isclose(distance, 0.0) and np.isclose(self.r, second_circle.r):
-            return inf  # pełne pokrycie
+            return Inf()  # pełne pokrycie
 
         # Albo są za daleko od siebie lub jeden jest całkowicie wewnątrz durgiego bez styczności
         elif (
