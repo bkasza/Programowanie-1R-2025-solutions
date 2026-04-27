@@ -1,0 +1,230 @@
+{
+    "Uklad 4F": {
+        "table": {
+            "width": 160,
+            "height": 100
+        },
+        "materials": {
+            "N-BK7": {
+                "b1": 1.03961212,
+                "b2": 0.231792344,
+                "b3": 1.01046945,
+                "c1": 0.006000699,
+                "c2": 0.0200179144,
+                "c3": 103.560653
+            }
+        },
+        "optical_elements": [
+            {
+                "type": "ThinLens",
+                "x": 38.5,
+                "y": 50,
+                "length": 80,
+                "angle": 1.57079632679,
+                "r1": 40,
+                "r2": -40,
+                "material": "N-BK7"
+            },
+            {
+                "type": "ThinLens",
+                "x": 115.5,
+                "y": 50,
+                "length": 80,
+                "angle": 1.57079632679,
+                "r1": 40,
+                "r2": -40,
+                "material": "N-BK7"
+            }
+        ],
+        "rays": [
+            {
+                "x": 0,
+                "y": 50,
+                "angle": 0.0,
+                "intensity": 1.0,
+                "wavelength": 532.0
+            },
+            {
+                "x": 0,
+                "y": 52,
+                "angle": 0.0,
+                "intensity": 1.0,
+                "wavelength": 532.0
+            },
+            {
+                "x": 0,
+                "y": 48,
+                "angle": 0.0,
+                "intensity": 1.0,
+                "wavelength": 532.0
+            }
+        ]
+    },
+    "Aberracja Chromatyczna": {
+        "table": {
+            "width": 150,
+            "height": 100
+        },
+        "materials": {
+            "SF10": {
+                "b1": 1.62153902,
+                "b2": 0.256287842,
+                "b3": 1.64447552,
+                "c1": 0.0122241457,
+                "c2": 0.0595736775,
+                "c3": 147.468793
+            }
+        },
+        "optical_elements": [
+            {
+                "type": "ThinLens",
+                "x": 30,
+                "y": 50,
+                "length": 80,
+                "angle": 1.57079632679,
+                "r1": 30,
+                "r2": -30,
+                "material": "SF10"
+            }
+        ],
+        "rays": [
+            {
+                "x": 0,
+                "y": 70,
+                "angle": 0.0,
+                "intensity": 1.0,
+                "wavelength": 450.0
+            },
+            {
+                "x": 0,
+                "y": 70,
+                "angle": 0.0,
+                "intensity": 1.0,
+                "wavelength": 532.0
+            },
+            {
+                "x": 0,
+                "y": 70,
+                "angle": 0.0,
+                "intensity": 1.0,
+                "wavelength": 650.0
+            },
+            {
+                "x": 0,
+                "y": 30,
+                "angle": 0.0,
+                "intensity": 1.0,
+                "wavelength": 450.0
+            },
+            {
+                "x": 0,
+                "y": 30,
+                "angle": 0.0,
+                "intensity": 1.0,
+                "wavelength": 532.0
+            },
+            {
+                "x": 0,
+                "y": 30,
+                "angle": 0.0,
+                "intensity": 1.0,
+                "wavelength": 650.0
+            }
+        ]
+    },
+    "Mach-Zehnder Interferometer": {
+        "table": {
+            "width": 200,
+            "height": 150
+        },
+        "materials": {
+            "N-BK7": {
+                "b1": 1.03961212,
+                "b2": 0.231792344,
+                "b3": 1.01046945,
+                "c1": 0.00600069867,
+                "c2": 0.0200179144,
+                "c3": 103.560653
+            }
+        },
+        "optical_elements": [
+            {
+                "type": "ThinLens",
+                "x": 30,
+                "y": 50,
+                "length": 40,
+                "angle": 1.57079632679,
+                "r1": 20,
+                "r2": -20,
+                "material": "N-BK7"
+            },
+            {
+                "type": "BeamSplitter",
+                "x": 80,
+                "y": 50,
+                "length": 30,
+                "angle": 0.78539816339,
+                "split_ratio": 0.5
+            },
+            {
+                "type": "Mirror",
+                "x": 80,
+                "y": 100,
+                "length": 30,
+                "angle": 0.78539816339
+            },
+            {
+                "type": "Mirror",
+                "x": 130,
+                "y": 50,
+                "length": 30,
+                "angle": 0.78539816339
+            },
+            {
+                "type": "BeamSplitter",
+                "x": 130,
+                "y": 100,
+                "length": 30,
+                "angle": 0.78539816339,
+                "split_ratio": 0.5
+            }
+        ],
+        "rays": [
+            {
+                "x": 10,
+                "y": 50,
+                "angle": 0.0,
+                "intensity": 1.0,
+                "wavelength": 532.0
+            },
+            {
+                "x": 10,
+                "y": 50,
+                "angle": 0.05,
+                "intensity": 1.0,
+                "wavelength": 532.0
+            },
+            {
+                "x": 10,
+                "y": 50,
+                "angle": -0.05,
+                "intensity": 1.0,
+                "wavelength": 532.0
+            },
+            {
+                "x": 10,
+                "y": 50,
+                "angle": 0.1,
+                "intensity": 1.0,
+                "wavelength": 532.0
+            },
+            {
+                "x": 10,
+                "y": 50,
+                "angle": -0.1,
+                "intensity": 1.0,
+                "wavelength": 532.0
+            }
+        ]
+    }
+}
