@@ -1,5 +1,75 @@
 
+from abc import ABC, abstractmethod
 import argparse
+import numpy as np
+import matplotlib.pyplot as plt
+
+class Shape(ABC):
+    def __init__(self, m):
+        self.m = m  # Rozmiar macierzy (m x m)
+
+    @abstractmethod
+    def draw(self):
+        """Zwraca macierz 2D reprezentującą kształt (używając np.fromfunction)."""
+        pass
+
+
+class Square(Shape):
+    def __init__(self, m, a):
+        super().__init__(m)
+        self.a = a
+
+    def draw(self):
+        def condition(y, x):
+            # ustawienie względem środka
+            x0, y0 = x - self.m // 2, y - self.m // 2
+            return (np.abs(x0) <= self.a / 2) & (np.abs(y0) <= self.a / 2)
+
+        return np.fromfunction(condition, (self.m, self.m), dtype=int).astype(int)
+
+
+class Rectangle(Shape):
+    def __init__(self, m, a, b):
+        super().__init__(m)
+        self.a = a
+        self.b = b
+
+    def draw(self):
+        def condition(y, x):
+            x0, y0 = x - self.m // 2, y - self.m // 2
+            return (np.abs(x0) <= self.a / 2) & (np.abs(y0) <= self.b / 2)
+
+        return np.fromfunction(condition, (self.m, self.m), dtype=int).astype(int)
+
+
+class Ellipse(Shape):
+    def __init__(self, m, a, b):
+        super().__init__(m)
+        self.a = a
+        self.b = b
+
+    def draw(self):
+        def condition(y, x):
+            x0, y0 = x - self.m // 2, y - self.m // 2
+            return (x0 / self.a) ** 2 + (y0 / self.b) ** 2 <= 1
+
+        return np.fromfunction(condition, (self.m, self.m), dtype=int).astype(int)
+
+
+def color_shape(shape_matrix, color, n):
+    color_arr = np.array(color, dtype=float)
+    background = np.zeros((*shape_matrix.shape, 3), dtype=float) # float, bo potem będziemy dzielić przez n^2
+    image = np.where(shape_matrix[..., np.newaxis] == 1, color_arr, background)
+
+    pad_w = n // 2
+    
+    smoothed = np.zeros_like(image, dtype=float)
+    for dy in range(-pad_w, pad_w + 1):
+        for dx in range(-pad_w, pad_w + 1):
+            smoothed += np.roll(image, shift=(dy, dx), axis=(0, 1))
+    smoothed /= (n ** 2)
+
+    return np.clip(smoothed, 0, 255).astype(np.uint8) #cast do uint8, wówczas imshow poradzi sobie z renderowaniem RGB
 
 def main():
     parser = argparse.ArgumentParser(description="Rysowanie kształtów w tablicy NumPy.")
